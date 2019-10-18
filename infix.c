@@ -1,33 +1,34 @@
 #include<stdio.h>
 #include<string.h>
+#include<math.h>
 void post(char inf[],char postfix[]);
-int cal(char postfix[]);
+int scalc(int v2,int v1,char op);
+int calc(char postfix[]);
 int pop();
-void push(char n);
-char arr[20];
+void push(int n);
+int arr[20];
 int top=-1,var[256];
 int main(void){
     char inf[20],postfix[20],c;
     int val;
     var['^']=5;var['*']=4;var['/']=3;var['+']=2;var['-']=1;var['(']=0;
-    /*printf("Enter the variables and their values\n");
-    scanf("%c",&c);
-    while(c!=EOF){
-        scanf("%d",&val);
+    printf("Enter the variables and their values (PRESS '0' TO STOP)\n");
+    scanf("%c %d\n",&c,&val);
+    while(c!='s'){
         var[c]=val;
-        scanf("%c",&c);
-    }*/
+        scanf("%c %d\n",&c,&val);
+    }
     printf("Enter the Infix expression\n");
     scanf("%s",inf);
     post(inf,postfix);
     printf("Postfix Expression: %s\n",postfix);
-   // printf("%d\n",calc(postfix));
+    printf("%d\n",calc(postfix));
 }
 int pop(){
     top--;
     return arr[top+1];
 }
-void push(char n){
+void push(int n){
     top++;
     arr[top]=n;
 }
@@ -64,5 +65,24 @@ void post(char inf[],char postfix[]){
         }
         if(inf[i+1]=='\0') postfix[j]='\0';
         i++;
+    }
+}
+int calc(char pos[]){
+    int i=0;
+    while(pos[i]!='\0'){
+        if(pos[i]>='a' || pos[i]<='z') push(var[pos[i]]);
+        else if(pos[i]=='+' || pos[i]=='-' || pos[i]=='^' || pos[i]=='*' || pos[i]=='/') push(scalc(pop(),pop(),pos[i]));
+        i++;
+    }
+    return pop();
+}
+
+int scalc(int v2,int v1,char op){
+    switch(op){
+        case '+':return (v1+v2);
+        case '-':return (v1-v2);
+        case '*':return (v1*v2);
+        case '/':return (v1/v2);
+        case '^':return (pow(v1,v2));
     }
 }
