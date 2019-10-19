@@ -82,9 +82,9 @@ int calc(char pos[]){
 int scalc(int v2,int v1,char op){
     switch(op){
         case '+':return (v1+v2);
-        case '-':return (v1-v2);
+        case '-':return (v2-v1);
         case '*':return (v1*v2);
-        case '/':return (v1/v2);
-        case '^':return (pow(v1,v2));
+        case '/':return (v2/v1);
+        case '^':return (pow(v2,v1));
     }
 }
