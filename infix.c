@@ -13,10 +13,12 @@ int main(void){
     int val;
     var['^']=5;var['*']=4;var['/']=3;var['+']=2;var['-']=1;var['(']=0;
     printf("Enter the variables and their values (PRESS '0' TO STOP)\n");
-    scanf("%c %d\n",&c,&val);
-    while(c!='s'){
+    scanf("%c ",&c);
+    scanf("%d",&val);
+    while(c!='0'){
         var[c]=val;
-        scanf("%c %d\n",&c,&val);
+        scanf("\n%c ",&c);
+        scanf("%d",&val);
     }
     printf("Enter the Infix expression\n");
     scanf("%s",inf);
@@ -70,7 +72,7 @@ void post(char inf[],char postfix[]){
 int calc(char pos[]){
     int i=0;
     while(pos[i]!='\0'){
-        if(pos[i]>='a' || pos[i]<='z') push(var[pos[i]]);
+        if(pos[i]>='a' && pos[i]<='z') push(var[pos[i]]);
         else if(pos[i]=='+' || pos[i]=='-' || pos[i]=='^' || pos[i]=='*' || pos[i]=='/') push(scalc(pop(),pop(),pos[i]));
         i++;
     }
