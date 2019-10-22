@@ -11,7 +11,7 @@ int top=-1,var[256];
 int main(void){
     char inf[20],postfix[20],c;
     int val;
-    var['^']=5;var['*']=4;var['/']=3;var['+']=2;var['-']=1;var['(']=0;
+    var['^']=5;var['*']=3;var['/']=3;var['+']=2;var['-']=2;var['(']=1;
     printf("Enter the variables and their values (PRESS '0' TO STOP)\n");
     scanf("%c ",&c);
     scanf("%d",&val);
@@ -48,7 +48,7 @@ void post(char inf[],char postfix[]){
         else if(inf[i]=='/' || inf[i]=='-' || inf[i]=='+' || inf[i]=='*' || inf[i]=='^'){
             if(arr[top]=='(') push(inf[i]);
             else{
-                if(var[inf[i]]<var[arr[top]]){
+                if(var[inf[i]]<=var[arr[top]]){
                     while(arr[top]!='('){
                         postfix[j]=pop();
                         j++;
