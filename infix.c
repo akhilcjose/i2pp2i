@@ -49,7 +49,7 @@ void post(char inf[],char postfix[]){
             if(arr[top]=='(') push(inf[i]);
             else{
                 if(var[inf[i]]<=var[arr[top]]){
-                    while(arr[top]!='('){
+                    while(var[arr[top]]>=var[inf[i]]){
                         postfix[j]=pop();
                         j++;
                     }
